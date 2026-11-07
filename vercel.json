@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/((?!api/|assets/|rdkit/|ketcher/|editor.html).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -1,0 +1,979 @@
+
+Anda adalah Senior Full-Stack Engineer, Computational Chemist, Cheminformatics Developer, Bioinformatics Engineer, AI/ML Engineer, dan UI/UX Architect.
+
+TUGAS UTAMA
+
+Bangun aplikasi web bernama:
+
+SOBRI UNIVERSAL DRUGFORGE AI
+Universal AI-Powered Drug Discovery & Development Research Platform
+
+Founder/Researcher: Muhammad Sobri Maulana
+
+STACK WAJIB:
+- Vite
+- React
+- TypeScript
+- Tailwind CSS
+- Vercel
+- localStorage sebagai penyimpanan utama proyek
+- IndexedDB opsional untuk dataset besar dan berkas molekul
+- Tanpa database server wajib
+- Tanpa login wajib
+- Responsive desktop, tablet, dan smartphone
+- Dark/light mode
+- PWA jika memungkinkan
+
+MISI
+
+Aplikasi harus dapat digunakan untuk penelitian SEMUA KATEGORI OBAT, tanpa hardcode hanya untuk kanker, antibiotik, atau penyakit tertentu.
+
+Pengguna harus dapat:
+1. Mencari obat yang sudah ada.
+2. Menambahkan obat yang belum tersedia di katalog.
+3. Memilih penyakit atau indikasi penelitian.
+4. Memilih atau memasukkan target biologis.
+5. Membuat proyek penemuan kandidat obat baru.
+6. Mengimpor struktur atau data obat.
+7. Mengedit molekul apabila modalitasnya mendukung.
+8. Menjalankan analisis komputasional yang nyata.
+9. Melatih model AI berdasarkan data eksperimen.
+10. Membandingkan beberapa kandidat.
+11. Mengoptimasi parameter penelitian.
+12. Menyimpan semua eksperimen.
+13. Mengulang eksperimen dengan parameter berbeda.
+14. Mengekspor hasil, grafik, dan laporan ilmiah.
+15. Menghubungkan data kandidat dengan bukti ilmiah.
+
+PENTING:
+Mendukung semua kategori obat tidak berarti satu algoritma dapat memprediksi semua kategori terapi.
+
+Bangun UNIVERSAL MODALITY ENGINE yang memilih metode analisis yang sesuai dengan modalitas.
+
+Jangan pernah membuat angka eksperimen palsu, skor aktivitas acak, hasil docking fiktif, atau mengklaim suatu kandidat efektif hanya berdasarkan prediksi AI.
+
+========================================
+A. UNIVERSAL DRUG MODALITY ENGINE
+========================================
+
+Buat arsitektur plugin/adaptor untuk berbagai kategori obat:
+
+1. Small Molecule Drugs
+2. Generic Drugs
+3. Branded Drugs
+4. Investigational Compounds
+5. Drug Repurposing Candidates
+6. Natural Products
+7. Herbal Medicines
+8. Peptide Therapeutics
+9. Protein Therapeutics
+10. Monoclonal Antibodies
+11. Biosimilars
+12. Oligonucleotide Therapeutics
+13. siRNA / Antisense Therapeutics
+14. mRNA Therapeutics
+15. Vaccines
+16. Cell Therapies
+17. Gene Therapies
+18. Radiopharmaceuticals
+19. Drug Combinations
+20. Nanomedicine
+21. Advanced Drug Delivery Systems
+22. Medical Gases and Other Special Modalities
+23. Custom / Research-Defined Modality
+
+Setiap modalitas harus punya schema dan kapabilitasnya sendiri.
+
+Contoh:
+Small molecule:
+- SMILES
+- Molecular descriptors
+- Fingerprints
+- Similarity
+- Activity prediction
+
+Protein / antibody:
+- Sequence
+- Molecular composition
+- Reference structure
+- Experimental evidence
+
+RNA / oligonucleotide:
+- Sequence metadata
+- Basic sequence properties
+- Target annotation
+- Literature evidence
+
+Vaccine:
+- Platform
+- Antigen information
+- Evidence records
+- Development stage
+
+Cell / gene therapy:
+- Modality metadata
+- Disease indication
+- Evidence records
+- Development and regulatory status
+
+Jangan menampilkan molecular docking atau small-molecule QSAR untuk jenis obat yang tidak kompatibel.
+
+Setiap kapabilitas diberi status:
+- Available
+- Requires Dataset
+- Requires External Engine
+- Experimental
+- Not Applicable
+
+========================================
+B. MAIN APPLICATION NAVIGATION
+========================================
+
+Buat sidebar desktop dan bottom navigation mobile.
+
+Halaman utama:
+
+1. Dashboard
+2. All Drugs Explorer
+3. Drug Discovery Projects
+4. Disease & Target Explorer
+5. Molecular Designer
+6. Biologics & Sequence Lab
+7. AI Model Laboratory
+8. Virtual Screening
+9. Candidate Optimization
+10. ADMET Research
+11. Drug Repurposing
+12. Natural Product Explorer
+13. Formulation Research
+14. Experiment Workbench
+15. Results Comparison
+16. Scientific Evidence
+17. Research Reports
+18. Local Data Manager
+19. Settings
+
+Gunakan routing yang benar.
+
+Tidak boleh ada menu atau tombol dekoratif yang tidak berfungsi.
+
+========================================
+C. UNIVERSAL ALL-DRUGS EXPLORER
+========================================
+
+Buat mesin pencarian obat universal.
+
+Pengguna dapat mencari berdasarkan:
+- Nama obat
+- Nama generik
+- Nama dagang
+- Nama senyawa
+- Sinonim
+- ChEMBL ID
+- PubChem CID
+- SMILES
+- InChIKey
+- Kelas terapi
+- ATC code
+- Target protein
+- Penyakit
+- Mekanisme kerja
+- Modalitas
+- Tahap pengembangan
+
+Integrasikan sumber publik yang sesuai:
+- PubChem PUG REST
+- ChEMBL API
+- UniProt
+- RCSB PDB
+- Open Targets
+- ClinicalTrials.gov API
+
+Tambahkan sumber lain hanya jika benar-benar tersedia, relevan, dan memenuhi lisensi akses.
+
+Jangan menyalin dataset seluruh dunia ke dalam bundle aplikasi.
+
+Gunakan:
+- Pencarian berdasarkan permintaan
+- Pagination
+- Caching lokal
+- Retry terbatas
+- Rate-limit handling
+- Source provenance
+- Date retrieved
+- Offline fallback
+
+Detail obat menampilkan:
+- Drug identity
+- Active ingredient
+- Modality
+- Molecular information jika tersedia
+- Mechanism of action
+- Target information
+- Indications
+- Development status
+- Relevant assays
+- Experimental bioactivity
+- External references
+
+Pisahkan informasi yang berasal dari database, hasil perhitungan, hasil prediksi, dan input pengguna.
+
+========================================
+D. UNIVERSAL RESEARCH PROJECT
+========================================
+
+Pengguna harus dapat membuat proyek penelitian baru.
+
+Field:
+- Project name
+- Project ID
+- Research question
+- Disease
+- Therapeutic area
+- Drug modality
+- Target
+- Research hypothesis
+- Study design
+- Dataset
+- Analysis methods
+- Validation plan
+- Research notes
+- Creation date
+- Updated date
+
+Tidak boleh membatasi disease atau target menggunakan enum tertutup.
+
+Sediakan:
+- Search predefined option
+- Add custom disease
+- Add custom target
+- Add custom modality
+- Add custom compound
+
+Proyek mendukung:
+- Autosave
+- Duplicate
+- Rename
+- Version history
+- Experiment history
+- Archive
+- Import JSON
+- Export JSON
+- Export CSV
+- Compare versions
+
+========================================
+E. REAL MOLECULAR DESIGNER
+========================================
+
+Untuk small molecules, gunakan Ketcher Standalone dan RDKit.js.
+
+Fitur wajib:
+- Interactive 2D molecular editor
+- Add/remove atom
+- Add/remove bond
+- Edit bond order
+- Aromatic ring editing
+- Functional group editing
+- Stereochemistry editing
+- SMILES input
+- SMILES export
+- Structure validation
+- Canonicalization
+- Molecular drawing
+- Molecular structure comparison
+- Undo/redo
+
+Integrasikan RDKit.js WebAssembly.
+
+Hitung parameter yang benar-benar didukung:
+- Molecular weight
+- cLogP
+- TPSA
+- H-bond donors
+- H-bond acceptors
+- Rotatable bonds
+- Ring count
+- Heavy atom count
+- Molecular fingerprints
+- Tanimoto similarity
+- Rule-of-five checks
+- Structural alerts jika tersedia
+
+Jika sebuah fitur tidak tersedia di build RDKit.js yang digunakan, jangan mengarang nilai.
+
+Setelah struktur diedit:
+1. Validasi molekul.
+2. Hitung ulang deskriptor.
+3. Simpan versi struktur.
+4. Perbarui visualisasi.
+5. Tandai prediksi lama sebagai stale.
+6. Jalankan ulang analisis hanya saat diminta.
+
+Sediakan mode perbandingan:
+Original Molecule vs Modified Molecule.
+
+Tampilkan perubahan parameter dalam tabel dan grafik.
+
+========================================
+F. BIOLOGICS & SEQUENCE LAB
+========================================
+
+Buat editor penelitian berbasis sekuens untuk kategori yang kompatibel.
+
+Fitur:
+- Import FASTA
+- Paste protein sequence
+- Paste peptide sequence
+- Paste nucleotide sequence
+- Sequence validation
+- Sequence length
+- Amino-acid composition
+- Basic molecular mass estimation
+- Sequence comparison
+- External reference lookup
+- Sequence annotation
+- Research notes
+
+Jangan memperlakukan data sekuens sebagai bukti efikasi.
+
+Jangan menyediakan desain otomatis untuk meningkatkan patogenisitas, toksisitas biologis, atau kemampuan menghindari sistem imun.
+
+========================================
+G. REAL AI MODEL LABORATORY
+========================================
+
+Buat modul machine learning yang benar-benar dapat dilatih dan dievaluasi.
+
+Model awal:
+- Linear regression
+- Logistic regression
+- Random Forest
+- Gradient-boosted trees jika tersedia
+- Molecular fingerprint similarity baseline
+
+Gunakan library JavaScript yang kompatibel.
+Jalankan pelatihan berat dalam Web Worker.
+
+Fitur:
+- Import dataset CSV
+- Choose target variable
+- Select features
+- Data validation
+- Missing-value handling
+- Train/validation/test split
+- Seed setting
+- Model training
+- Cross-validation
+- Evaluation metrics
+- Model comparison
+- Save experiment metadata
+- Prediction on compatible candidates
+
+Untuk regression:
+- MAE
+- RMSE
+- R-squared
+
+Untuk classification:
+- ROC-AUC
+- PR-AUC
+- Accuracy
+- Precision
+- Recall
+- F1
+- Confusion matrix
+- Calibration jika tersedia
+
+Untuk prediksi molekul:
+- Scaffold split
+- Duplicate detection
+- Data leakage checks
+- Applicability domain estimation
+- Prediction uncertainty jika metode mendukung
+
+Semua hasil harus dihitung dari dataset yang benar.
+
+Jangan tampilkan prediksi bila model belum dilatih atau belum ada model tervalidasi yang kompatibel.
+
+========================================
+H. VIRTUAL SCREENING
+========================================
+
+Pengguna dapat memilih atau mengimpor kumpulan kandidat.
+
+Alur:
+1. Import candidate library.
+2. Standardize structures.
+3. Remove invalid entries.
+4. Compute descriptors.
+5. Detect duplicates.
+6. Apply configurable filters.
+7. Use trained compatible AI model.
+8. Rank candidates.
+9. Inspect individual results.
+10. Export screening table.
+
+Ranking harus menjelaskan parameter dan dasar pembobotannya.
+
+Buat ranking multi-objective:
+- Predicted activity
+- Molecular properties
+- Uncertainty
+- Structural alerts
+- Similarity to reference compounds
+
+Jangan menyebut ranking sebagai konfirmasi aktivitas biologis.
+
+Molecular docking hanya boleh berstatus Available jika mesin docking nyata berhasil diintegrasikan dan diverifikasi.
+
+Jika membutuhkan backend khusus, buat adapter dan berikan status Requires External Engine.
+
+Jangan membuat docking score dummy.
+
+========================================
+I. CANDIDATE OPTIMIZATION
+========================================
+
+Buat interactive optimization workbench.
+
+Pengguna dapat:
+- Select reference molecule
+- Duplicate candidate
+- Modify structure
+- Recalculate descriptors
+- Predict activity using trained model
+- Compare original vs new
+- Adjust optimization weights
+- Save candidate version
+- Restore previous version
+
+Tambahkan Pareto comparison untuk beberapa objective.
+
+Visualisasi:
+- Scatter plot
+- Radar chart
+- Property distribution
+- Candidate ranking
+- Version comparison
+
+Berikan peringatan bila prediksi berada di luar applicability domain model.
+
+========================================
+J. ADMET RESEARCH
+========================================
+
+Pisahkan:
+
+1. Calculated physicochemical properties
+2. Experimental ADMET data
+3. Predicted ADMET properties
+
+Pengguna dapat mencari data eksperimental yang relevan dari sumber yang tersedia.
+
+Fitur:
+- Lipophilicity analysis
+- Solubility data lookup
+- Permeability evidence
+- Metabolic evidence
+- Clearance evidence
+- Toxicity evidence
+- Structural alerts
+
+Jangan membuat prediksi hepatotoksisitas, kardiotoksisitas, atau keamanan pasien menggunakan formula buatan.
+
+Jika tidak tersedia dataset dan model tervalidasi, tampilkan "Model unavailable".
+
+Setiap prediksi harus memiliki:
+- Model name
+- Dataset source
+- Training date
+- Validation metrics
+- Applicable modality
+- Uncertainty
+- Limitations
+
+========================================
+K. DRUG REPURPOSING
+========================================
+
+Buat modul untuk menilai obat yang sudah dikenal terhadap indikasi penelitian lain.
+
+Fitur:
+- Search existing drugs
+- Search disease
+- Search targets
+- Compare known mechanisms
+- Link to reported evidence
+- Show clinical trial records
+- Rank hypotheses based on declared criteria
+- Record evidence gaps
+
+Jangan menganggap asosiasi database sebagai bukti bahwa obat efektif untuk indikasi baru.
+
+========================================
+L. NATURAL PRODUCT RESEARCH
+========================================
+
+Buat Natural Product Explorer.
+
+Mendukung:
+- Medicinal plants
+- Indonesian spices
+- Natural compounds
+- Traditional medicine research
+
+Contoh:
+- Syzygium aromaticum
+- Curcuma longa
+- Zingiber officinale
+
+Fitur:
+- Compound import
+- PubChem lookup
+- Structure analysis
+- Literature annotation
+- Experimental evidence tracking
+- Comparison with known compounds
+
+Tidak boleh mengarang kandungan kimia atau aktivitas suatu tanaman.
+
+========================================
+M. FORMULATION RESEARCH
+========================================
+
+Buat workspace untuk menyimpan dan membandingkan rancangan formulasi penelitian.
+
+Data:
+- Dosage form
+- Ingredient identities
+- Excipient records
+- Stability evidence
+- Solubility evidence
+- Compatibility observations
+- Research notes
+- Version comparison
+
+Jangan mengklaim simulasi formulasi dapat memastikan stabilitas, sterilitas, keamanan, atau kesetaraan terapeutik.
+
+Jangan menyediakan instruksi manufaktur berisiko sebagai fitur otomatis.
+
+========================================
+N. EXPERIMENT WORKBENCH
+========================================
+
+Setiap analisis menjadi experiment record.
+
+Schema:
+- Experiment ID
+- Project ID
+- Input snapshot
+- Method
+- Software version
+- Dataset version
+- Parameters
+- Random seed
+- Start time
+- End time
+- Output
+- Metrics
+- Warnings
+- Error log
+- Provenance
+- Status
+
+Status:
+- Queued
+- Running
+- Completed
+- Failed
+- Cancelled
+- Requires External Validation
+
+Tambahkan:
+- Run
+- Cancel
+- Rerun
+- Duplicate
+- Compare
+- Export
+- Delete
+
+Tiap eksperimen harus reproducible sejauh didukung metode dan data yang tersedia.
+
+========================================
+O. SCIENTIFIC EVIDENCE ENGINE
+========================================
+
+Buat sistem pelacakan bukti ilmiah.
+
+Setiap klaim dapat dihubungkan dengan:
+- DOI
+- PMID
+- Article title
+- Publication year
+- Source URL
+- Evidence type
+- Study design
+- Notes
+
+Bedakan:
+- Computational prediction
+- In vitro evidence
+- Animal study
+- Clinical trial
+- Regulatory evidence
+
+Jangan membuat referensi palsu.
+
+Jangan menggunakan LLM untuk mengisi hasil penelitian yang tidak tersedia.
+
+========================================
+P. LOCAL STORAGE AND DATA MANAGEMENT
+========================================
+
+Gunakan localStorage untuk:
+- Projects
+- Settings
+- Candidate metadata
+- Experiment metadata
+- Notes
+- UI preferences
+- Saved search definitions
+
+Gunakan IndexedDB untuk:
+- Large imported datasets
+- Cached external responses
+- Molecular structure files
+- Large model artifacts
+
+Buat:
+- Schema versioning
+- Storage migration
+- Validation
+- Error recovery
+- Backup JSON
+- Restore JSON
+- Clear cache
+- Storage usage indicator
+
+Jangan menyimpan API secret atau data pasien sensitif di localStorage.
+
+Buat notifikasi jika kapasitas penyimpanan hampir habis.
+
+========================================
+Q. UI/UX DESIGN
+========================================
+
+Desain seperti platform penelitian biomedis profesional.
+
+Karakter visual:
+- Clean scientific interface
+- Modern medical technology
+- Responsive layout
+- Dense but readable data tables
+- Professional scientific charts
+- Interactive molecule panels
+
+Dashboard berisi:
+- Active projects
+- Saved compounds
+- Drug modalities
+- Recent experiments
+- Completed analyses
+- Data source connectivity
+- Storage status
+
+Gunakan:
+- shadcn/ui jika kompatibel
+- Lucide icons
+- Recharts
+- TanStack Table
+- React Router
+- Zustand atau state-management setara
+
+Molecular editor harus memiliki area kerja yang luas.
+
+Pastikan bisa digunakan dengan mouse, keyboard, dan touch.
+
+========================================
+R. REAL DATA INTEGRATIONS
+========================================
+
+Implementasikan API adapters yang terpisah.
+
+Adapter interface harus mendukung:
+- search()
+- fetchById()
+- normalize()
+- getProvenance()
+- handleErrors()
+
+Sumber utama:
+PubChem
+ChEMBL
+UniProt
+RCSB PDB
+Open Targets
+ClinicalTrials.gov
+
+Periksa dokumentasi API terkini sebelum implementasi.
+
+Gunakan data source yang benar-benar dapat diakses.
+
+Tampilkan:
+- Connected
+- Unavailable
+- Rate Limited
+- Offline
+
+Jangan menganggap HTTP 200 berarti data valid.
+
+Lakukan schema validation.
+
+Bila perlu gunakan Vercel Serverless Functions untuk proxy API yang spesifik dan aman.
+
+Jangan membuat unrestricted proxy.
+
+========================================
+S. RESEARCH REPORT GENERATOR
+========================================
+
+Buat tombol "Generate Research Report".
+
+Isi laporan:
+1. Research title
+2. Research question
+3. Background
+4. Dataset
+5. Molecular or modality information
+6. Methods
+7. Experiment configuration
+8. Results
+9. Tables
+10. Figures
+11. Model evaluation
+12. Limitations
+13. Evidence sources
+14. Reproducibility metadata
+15. Conclusions restricted to actual findings
+
+Export:
+- PDF
+- CSV
+- JSON
+- Molecular structure format jika kompatibel
+
+Jangan membuat paragraf kesimpulan ilmiah yang melebihi bukti.
+
+========================================
+T. SOFTWARE ARCHITECTURE
+========================================
+
+Gunakan struktur modular:
+
+src/
+  app/
+  components/
+  layouts/
+  pages/
+  features/
+    drug-explorer/
+    projects/
+    targets/
+    molecules/
+    biologics/
+    ai-models/
+    screening/
+    optimization/
+    admet/
+    repurposing/
+    natural-products/
+    formulations/
+    experiments/
+    reports/
+  core/
+    modality-registry/
+    chemistry/
+    machine-learning/
+    evidence/
+    validation/
+  integrations/
+    pubchem/
+    chembl/
+    uniprot/
+    rcsb/
+    opentargets/
+    clinicaltrials/
+  storage/
+  workers/
+  types/
+  tests/
+
+Gunakan TypeScript strict mode.
+
+Buat interface ModalityAdapter yang memiliki:
+- id
+- displayName
+- supportedInputs
+- supportedAnalyses
+- validateInput()
+- getAvailableCapabilities()
+- normalizeCandidate()
+- executeSupportedAnalysis()
+
+Setiap fitur harus mengecek kapabilitas modality sebelum berjalan.
+
+========================================
+U. VERCEL DEPLOYMENT
+========================================
+
+Pastikan:
+- npm install berhasil
+- npm run dev berhasil
+- npm run build berhasil
+- SPA deep links berfungsi
+- vercel.json benar
+- RDKit WASM assets terlayani
+- Ketcher assets termuat
+- Tidak ada API key di frontend
+- Environment variables terdokumentasi
+- Error boundary tersedia
+
+Jika menggunakan Vercel Functions, jangan mengandalkan fungsi tersebut untuk komputasi docking atau simulasi berat yang melebihi batas runtime.
+
+========================================
+V. TESTING WAJIB
+========================================
+
+Buat unit tests dan end-to-end tests.
+
+Uji kasus:
+
+1. Search aspirin using PubChem.
+2. Retrieve actual chemical structure.
+3. Validate SMILES using RDKit.
+4. Calculate molecular descriptors.
+5. Modify molecular structure.
+6. Verify descriptor recalculation.
+7. Save project.
+8. Reload and recover project.
+9. Import a real assay dataset.
+10. Train compatible ML model.
+11. Evaluate model using held-out data.
+12. Save model experiment.
+13. Compare multiple candidates.
+14. Export JSON and CSV.
+15. Create peptide research record.
+16. Create antibody research record.
+17. Create vaccine research record.
+18. Confirm incompatible molecular analysis is disabled for unsupported modalities.
+19. Handle API failure properly.
+20. Build and verify production deployment.
+
+Tambahkan integration tests dengan mock API fixtures dan uji konektivitas aktual secara terpisah.
+
+Tidak boleh ada test yang lolos hanya karena hasil perhitungan sudah di-hardcode.
+
+========================================
+W. DEVELOPMENT PRIORITIES
+========================================
+
+Kerjakan bertahap.
+
+PHASE 1 — FUNCTIONAL FOUNDATION
+- Vite project
+- Layout and navigation
+- Universal modality schemas
+- localStorage persistence
+- Project manager
+- Drug explorer
+- External API integrations
+
+PHASE 2 — REAL CHEMISTRY ENGINE
+- Ketcher
+- RDKit.js
+- SMILES validation
+- Molecular descriptors
+- Structure editing
+- Candidate comparison
+
+PHASE 3 — REAL AI WORKBENCH
+- Dataset importer
+- Model training
+- Metrics
+- Scaffold split
+- Model evaluation
+- Candidate prediction
+- Experiment history
+
+PHASE 4 — MODALITY EXTENSIONS
+- Biologics sequence laboratory
+- Natural products
+- Drug repurposing
+- ADMET evidence explorer
+- Formulation research
+- General therapeutic modality registry
+
+PHASE 5 — SCIENTIFIC OUTPUT
+- Reports
+- Evidence tracking
+- Data provenance
+- Export
+- Testing
+- Vercel deployment
+
+Bangun PHASE 1 dan PHASE 2 sebagai MVP yang lengkap dan berfungsi sebelum memperluas ke fitur berikutnya.
+
+Teruskan ke fase berikutnya sesuai kapasitas pekerjaan, tetapi jangan mengklaim fitur selesai apabila belum diimplementasikan dan diuji.
+
+========================================
+X. ACCEPTANCE CRITERIA
+========================================
+
+Aplikasi dinyatakan layak apabila:
+
+1. Semua modalitas obat dapat dibuat sebagai proyek.
+2. Semua kategori dapat dicari atau diimpor melalui data yang tersedia.
+3. Small molecule dapat benar-benar diedit.
+4. Molecular descriptors dihitung oleh RDKit, bukan angka palsu.
+5. Data eksperimen dapat diimpor.
+6. Model AI dapat dilatih pada data yang kompatibel.
+7. Hasil model dapat diuji dan dibandingkan.
+8. Eksperimen dapat disimpan dan diulang.
+9. Proyek tetap tersedia setelah refresh.
+10. Ekspor data berfungsi.
+11. Hasil berasal dari sumber atau komputasi yang dapat ditelusuri.
+12. Fitur yang tidak tersedia menampilkan status jujur.
+13. Tidak ada tombol palsu.
+14. Tidak ada hasil riset fiktif.
+15. Build production berhasil.
+
+========================================
+Y. FINAL INSTRUCTIONS
+========================================
+
+Jangan hanya membuat prototype visual atau landing page.
+
+Buat source code aplikasi yang modular, dapat dijalankan, dan diuji.
+
+Gunakan implementasi yang benar-benar bekerja untuk setiap fitur yang dinyatakan selesai.
+
+Jika menemukan keterbatasan ilmiah, lisensi data, komputasi, atau platform browser:
+- Identifikasi keterbatasannya.
+- Implementasikan fitur yang memang didukung.
+- Tandai fitur lain secara eksplisit.
+- Jangan menggantinya dengan hasil simulasi palsu.
+
+Jangan menghasilkan petunjuk sintesis bahan berbahaya, desain agen biologis berisiko, atau protokol eksperimen yang dapat meningkatkan patogenisitas.
+
+Prioritaskan fungsi penelitian komputasional yang sah, dapat direproduksi, dan dapat dipertanggungjawabkan secara ilmiah.
+
+Di akhir implementasi:
+- Jalankan build dan test.
+- Perbaiki semua error yang ditemukan.
+- Tuliskan fitur yang selesai.
+- Tuliskan keterbatasan yang tersisa.
+- Sertakan README.md.
+- Sertakan instruksi deploy Vercel.
+- Pastikan project siap digunakan dan dikembangkan lebih lanjut.

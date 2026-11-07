@@ -1,0 +1,8 @@
+node_modules
+dist
+public/rdkit
+public/ketcher
+test-results
+playwright-report
+package-lock.json
+docs/REQUIREMENTS.id.txt
