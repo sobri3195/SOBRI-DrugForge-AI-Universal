@@ -1,0 +1,9 @@
+node_modules/
+dist/
+public/rdkit/
+public/ketcher/
+test-results/
+playwright-report/
+.env*
+!.env.example
+*.tsbuildinfo
