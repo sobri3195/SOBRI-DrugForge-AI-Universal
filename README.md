@@ -61,6 +61,8 @@ CHROMIUM_PATH=/path/to/chrome npm run test:e2e
 
 Unit tests cover capabilities, invalid inputs, sequence validation, API fixtures, CSV escaping, persistence schemas and the proxy boundary. Browser tests cover project persistence/history, a fixture-based aspirin lookup followed by real RDKit and Ketcher calculations, compatible/incompatible modalities, exports, API errors/offline fallback and mobile theme/navigation. Mock fixtures are used only at the external API boundary; chemistry is computed by the actual WASM engine. Live source tests are a separate manual check, not counted as passing fixture tests.
 
+Current-instance validation: clean `npm ci`, 13 unit tests, 5 browser tests against Vite development, 5 browser tests against the production static build, and the TypeScript/Vite build passed. Live source access and an actual Vercel deployment remain unverified.
+
 ## Vercel deployment
 
 1. Import this repository into Vercel. Select the Vite framework preset and Node.js 24.x.

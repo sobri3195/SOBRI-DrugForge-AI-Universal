@@ -35,6 +35,8 @@ export default defineConfig({
     },
   ],
   build: {
+    // Ketcher core mixes ESM exports with a Raphael require; transform both.
+    commonjsOptions: { transformMixedEsModules: true },
     rollupOptions: { input: { main: "index.html", editor: "editor.html" } },
   },
   optimizeDeps: { exclude: ["@rdkit/rdkit"] },

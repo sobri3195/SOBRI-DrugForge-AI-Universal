@@ -14,3 +14,4 @@ jobs:
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: CHROMIUM_PATH=$(node -e "console.log(require('@playwright/test').chromium.executablePath())") npm run test:e2e
+      - run: TEST_PRODUCTION=1 CHROMIUM_PATH=$(node -e "console.log(require('@playwright/test').chromium.executablePath())") npm run test:e2e
